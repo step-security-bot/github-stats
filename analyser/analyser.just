@@ -40,7 +40,7 @@ unit-test-debug:
     poetry run pytest application --cov=application --cov-report=xml -vvvv
 
 # ------------------------------------------------------------------------------
-# Ruff
+# Ruff - # Set up red-knot when it's ready
 # ------------------------------------------------------------------------------
 
 ruff-lint:
@@ -61,7 +61,3 @@ ruff-format-fix:
 
 vulture:
     poetry run vulture application
-
-# Replace with red-knot(ruff)
-pyright:
-    poetry run pyright application
