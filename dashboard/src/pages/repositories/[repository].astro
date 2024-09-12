@@ -4,13 +4,14 @@ import Layout from "../../layouts/Layout.astro";
 import RepositoryBreadcrumbs from "@/components/RepositoryBreadcrumbs.astro";
 import "@/styles/globals.css";
 
-type Repository = {
+interface Repository {
   repository: string;
   total_files: number;
-};
+  total_commits: number;
+}
 
 export function getStaticPaths() {
-  return repositories.map((repository: Repository) => ({
+  return repositories.flatMap((repository: Repository) => ({
     params: { repository: repository.repository },
   }));
 }
