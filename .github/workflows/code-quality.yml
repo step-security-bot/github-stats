@@ -37,12 +37,18 @@ jobs:
           VALIDATE_PYTHON_PYLINT: false
           VALIDATE_PYTHON_RUFF: false
           VALIDATE_PYTHON_PYINK: false
+          VALIDATE_CSS: false
+          VALIDATE_JSON: false
           VALIDATE_JAVASCRIPT_ES: false
           VALIDATE_JAVASCRIPT_PRETTIER: false
           VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_JSX: false
+          VALIDATE_JSX_PRETTIER: false
           VALIDATE_TYPESCRIPT_ES: false
           VALIDATE_TYPESCRIPT_PRETTIER: false
           VALIDATE_TYPESCRIPT_STANDARD: false
+          VALIDATE_TSX: false
+          VALIDATE_TSX_PRETTIER: false
 
   check-python-code-format-and-quality:
     name: Check Python Code Format and Quality
@@ -103,7 +109,7 @@ jobs:
         run: just dashboard::prettier-check
 
       - name: Run ESLint
-        run: just dashboard::eslint-check
+        run: just dashboard::lint
 
   check-tests-code-format-and-quality:
     name: Check Tests Code Format and Quality

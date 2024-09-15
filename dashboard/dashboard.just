@@ -6,42 +6,37 @@
 install:
     npm install
 
-dev:
-    npx astro dev
-
 start:
-    npx astro dev
+    npm run start
 
+# Start the development server
+dev:
+    npm run dev
+
+# Build an optimized production version of the app
 build:
-    npx astro check && npx astro build
+    npm run build
 
-preview:
-    npx astro preview
+# Lint typescript code with ESLint
+lint:
+    npm run lint
 
 # Run unit tests
 unit-test:
-    npx jest
+    npm run test
 
 # Run unit tests with coverage
 unit-test-coverage:
-    npx jest --coverage
+    npm run test:coverage
 
 # ------------------------------------------------------------------------------
 # Prettier
 # ------------------------------------------------------------------------------
 
+# Check if code is formatted correctly
 prettier-check:
-    npx prettier src --check
+    npx prettier . --check
 
+# Format code with Prettier
 prettier-format:
-    npx prettier src --check --write
-
-# ------------------------------------------------------------------------------
-# ESLint
-# ------------------------------------------------------------------------------
-
-eslint-check:
-    npx eslint src
-
-eslint-fix:
-    npx eslint src --fix
+    npx prettier . --check --write
