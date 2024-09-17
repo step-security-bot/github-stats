@@ -1,9 +1,8 @@
-from pathlib import Path
-
 import git
-from polars import DataFrame
+from pandas import DataFrame
 from structlog import get_logger, stdlib
 
+from .analysis.repository_analysis import analyse_repository
 from .catalogued_repository import CataloguedRepository
 from .utils.github_interactions import clone_repo, retrieve_repositories
 from .utils.repository_actions import remove_excluded_files
@@ -25,14 +24,19 @@ def create_statistics() -> None:
         # Create statistics for the repository
         catalogued_repository = create_repository_statistics(repository_name, path)
         list_of_repositories.append(catalogued_repository)
+
     logger.info("List of repositories", list_of_repositories=list_of_repositories)
     DataFrame(
-        {
-            "repository": [repository.repository_name for repository in list_of_repositories],
-            "total_files": [repository.total_files for repository in list_of_repositories],
-            "total_commits": [repository.total_commits for repository in list_of_repositories],
-        }
-    ).write_json("statistics/repository_statistics.json")
+        [
+            {
+                "repository": repository.repository_name,
+                "total_files": repository.total_files,
+                "total_commits": repository.total_commits,
+                "languages": repository.languages,
+            }
+            for repository in list_of_repositories
+        ]
+    ).to_json("statistics/repository_statistics.json", orient="records")
 
 
 def create_repository_statistics(repository_name: str, path_to_repo: str) -> CataloguedRepository:
@@ -46,18 +50,17 @@ def create_repository_statistics(repository_name: str, path_to_repo: str) -> Cat
         CataloguedRepository: The catalogued repository.
     """
     logger.info("Analysing repository", repository_name=repository_name)
-    file_count = 0
     # Retrieve the total number of commits
     repo = git.Repo(path_to_repo)
     total_commits = int(repo.git.rev_list("--count", "HEAD"))
     # Remove excluded files
     remove_excluded_files(path_to_repo)
-    # Count the number of files
-    iterator = Path(path_to_repo).walk()
-    for root, _dirs, files in iterator:
-        for file in files:
-            file_count += 1
-            file_path = f"{root.__str__()}/{file}"
-            logger.debug("Analysing file", file_path=file_path)
+    # Analyse the repository files
+    analysed_repository = analyse_repository(path_to_repo)
     # Return the catalogued repository
-    return CataloguedRepository(repository_name, file_count, total_commits)
+    return CataloguedRepository(
+        repository_name=repository_name,
+        total_files=analysed_repository.file_count,
+        total_commits=total_commits,
+        languages=analysed_repository.languages.get_data(),
+    )
