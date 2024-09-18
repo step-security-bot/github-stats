@@ -2,8 +2,9 @@ import git
 from pandas import DataFrame
 from structlog import get_logger, stdlib
 
-from .analysis.repository_analysis import analyse_repository
 from .catalogued_repository import CataloguedRepository
+from .commits.commits import get_commits
+from .file_analysis.repository_analysis import analyse_repository
 from .utils.github_interactions import clone_repo, retrieve_repositories
 from .utils.repository_actions import remove_excluded_files
 
@@ -32,6 +33,7 @@ def create_statistics() -> None:
                 "repository": repository.repository_name,
                 "total_files": repository.total_files,
                 "total_commits": repository.total_commits,
+                "commits": repository.commits,
                 "languages": repository.languages,
             }
             for repository in list_of_repositories
@@ -53,6 +55,8 @@ def create_repository_statistics(repository_name: str, path_to_repo: str) -> Cat
     # Retrieve the total number of commits
     repo = git.Repo(path_to_repo)
     total_commits = int(repo.git.rev_list("--count", "HEAD"))
+    # Get commits for the repository
+    commits = get_commits(path_to_repo)
     # Remove excluded files
     remove_excluded_files(path_to_repo)
     # Analyse the repository files
@@ -62,5 +66,6 @@ def create_repository_statistics(repository_name: str, path_to_repo: str) -> Cat
         repository_name=repository_name,
         total_files=analysed_repository.file_count,
         total_commits=total_commits,
+        commits=commits,
         languages=analysed_repository.languages.get_data(),
     )
