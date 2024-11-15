@@ -9,9 +9,7 @@ on:
     - cron: "0 0 * * *"
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 jobs:
   build:
@@ -33,6 +31,9 @@ jobs:
     needs: build
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
