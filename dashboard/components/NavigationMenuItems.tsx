@@ -3,7 +3,7 @@ import React from "react";
 
 import { cn } from "@/lib/utils";
 
-export default function MainNav({
+export default function NavigationMenuItems({
   className,
   ...props
 }: Readonly<React.HTMLAttributes<HTMLElement>>) {
@@ -14,19 +14,19 @@ export default function MainNav({
     >
       <Link
         href="/"
-        className="text-sm font-medium transition-colors hover:text-primary"
+        className="text-lg font-medium transition-colors hover:text-primary"
       >
         Overview
       </Link>
       <Link
         href="/user"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         User
       </Link>
       <Link
         href="/repositories"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        className="text-lg font-medium text-muted-foreground transition-colors hover:text-primary"
       >
         Repositories
       </Link>
