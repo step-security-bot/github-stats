@@ -19,6 +19,11 @@ jobs:
       id-token: write
       pages: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -40,6 +45,11 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4.0.5
@@ -49,6 +59,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -67,6 +82,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:

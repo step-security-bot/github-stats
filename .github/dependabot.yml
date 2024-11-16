@@ -52,3 +52,18 @@ updates:
       docker:
         patterns:
           - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /dashboard
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /docker/dashboard
+    schedule:
+      interval: daily

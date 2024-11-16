@@ -16,6 +16,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -56,6 +61,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
@@ -76,6 +86,11 @@ jobs:
     permissions:
       security-events: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
@@ -102,6 +117,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -127,6 +147,11 @@ jobs:
       statuses: write
       security-events: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -154,6 +179,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
@@ -174,6 +204,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout Repository
         uses: actions/checkout@v4.2.2
         with:
@@ -195,6 +230,11 @@ jobs:
       matrix:
         language: [python, javascript]
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout repository
         uses: actions/checkout@v4.2.2
       - name: Initialize CodeQL
@@ -211,6 +251,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -244,6 +289,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
@@ -266,6 +316,11 @@ jobs:
       security-events: write
       id-token: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: "Checkout code"
         uses: actions/checkout@v4.2.2
         with:
@@ -289,6 +344,11 @@ jobs:
     permissions:
       statuses: write
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
       - name: Checkout
         uses: actions/checkout@v4.2.2
         with:
